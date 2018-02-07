@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app1">
+        <my-component></my-component>
+        <!--<my-component2></my-component2>-->
+    </div>
+    <div id="app2">
+        <my-component></my-component>
+        <br/>
+        <my-component2></my-component2>
+    </div>
+    <script>
+        // my-component为全局注册组件，在vm1、vm2中都可以使用该组件
+        Vue.component('my-component', {
+            template: '<span>{{message}}</span>',
+            data: function() {
+                return {
+                    message: "全局组件消息1"
+                }
+            }
+        })
+        var vm1 = new Vue({
+                el: "#app1"
+            })
+            // my-component2为局部注册组件，只能在vm2中使用
+        var vm2 = new Vue({
+            el: "#app2",
+            components: {
+                // <my-component> 将只在父模板可用
+                'my-component2': {
+                    template: '<span>{{message}}</span>',
+                    data: function() {
+                        return {
+                            message: "局部组件消息2"
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

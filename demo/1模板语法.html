@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="../js/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<div>Message：{{msg}}</div>
+		rawHtml：
+		<span v-html="rawHtml"></span>
+		<div>{{arr}}</div>
+		<div>{{obj}}</div>
+		<div v-bind:id="dynamicId">看id属性{{dynamicId}}</div>
+		<button v-bind:disabled="isButtonDisabled">Button</button>
+		<div>{{1==1?true:false}}</div>
+		<div>{{'c'+'B'}}</div>
+		<div>{{'1'+'2'}}</div>
+		<div>{{3+4}}</div>
+		<div>{{(1,3)}}</div>
+		<div v-bind:id="'list-' + id">list-HGZX-3402-9999</div>
+		<div v-if="seen">现在你看到我了</div>
+		<a v-bind:href='url'></a>链接地址 {{url}}</a>
+		<br/>
+		<a href='javascript:;' @click="doSomething">点击操作</a>
+	</div>
+	<script>
+		new Vue({
+			el: '#app',
+			data: {
+				msg: '内容一',
+				arr: ['a', 'b', 'c'],
+				obj: {
+					a: 1
+				},
+				rawHtml: '内容二',
+				dynamicId: 'HGZX-3402-8888',
+				isButtonDisabled: false,
+				id: 'HGZX-3402-9999',
+				seen: true,
+				url: 'http://www.baidu.com'
+			},
+			methods: {
+				doSomething: () => {
+					alert('点击操作');
+				}
+			}
+		})
+	</script>
+</body>
+
+</html>

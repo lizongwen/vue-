@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="../js/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<component1 :message="message"></component1>
+		<component2 v-bind="childObj"></component2>
+		<component3 v-bind="childObj"></component3>
+		<!-- 这种传递数据方式在单个html文件里名称不能一致，例如不能用v-bind:childObj1="childObj1" -->
+		<component4 v-bind:obj="childObj1"></component4>
+		<!-- 注意props驼峰式变量，需要在这里用“-”连接 -->
+		<component5 :initial-counter="initial"></component5>
+		<component6 :letter="letter"></component6>
+	</div>
+	<script>
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				message: '组件一',
+				childObj: {
+					text: 'Learn Vue',
+					message: '组件七',
+					isComplete: true
+				},
+				childObj1: {
+					text: 'Learn Vue',
+					message: '组件八',
+					isComplete: true
+				},
+				initial: 1,
+				letter: 'A'
+			},
+			components: {
+				component1: {
+					template: `<div>{{message}}</div>`,
+					props: ['message']
+				},
+				component2: {
+					template: `<div><div>{{text}}{{message}}{{isComplete}}</div></div>`,
+					props: ['text', 'message', 'isComplete']
+				},
+				component3: {
+					template: `<div><div>{{text}}{{message}}{{isComplete}}</div></div>`,
+					props: {
+						text: {
+							type: String
+						},
+						message: [String, Number],
+						isComplete: Boolean
+					}
+				},
+				component4: {
+					template: `<div><div><div>{{obj}}</div></div><div>{{newObj}}</div></div>`,
+					props: {
+						obj: {
+							type: Object
+						}
+					},
+					data: function () {
+						return {
+							newObj: (() => {
+								this.obj.text='新内容';
+								return '内容:' + this.obj.text
+							})()
+						}
+					}
+				},
+				// 子组件接受变量值然后赋给新data数据
+				component5: {
+					template: `<div>{{counter}}</div>`,
+					props: ['initialCounter'],
+					data: function () {
+						return { counter: this.initialCounter + 1 }
+					}
+				},
+				component6: {
+					template: `<div>{{normalizedSize}}</div>`,
+					props: ['letter'],
+					computed: {
+						normalizedSize: function () {
+							return this.letter.trim().toLowerCase()
+						}
+					}
+				}
+
+			}
+		});
+	</script>
+</body>
+
+</html>

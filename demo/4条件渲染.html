@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="../js/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<!-- 条件语句 -->
+		<h1 v-if='false'>Yes</h1>
+		<h1 v-else>No</h1>
+		<h1 v-if="ok">Yes</h1>
+		<h1 v-else>No</h1>
+		<!-- 渲染后不包含template元素，内容可改变 -->
+		<template v-if="isok">
+			<h1>Title</h1>
+			<p>Paragraph 1</p>
+			<p>Paragraph 2</p>
+		</template>
+		<div v-if="Math.random() > 0.5">
+			现在是if内容
+		</div>
+		<div v-else>
+			现在是else内容
+		</div>
+		<div v-if="type === 'A'">
+			A
+		</div>
+		<div v-else-if="type === 'B'">
+			B
+		</div>
+		<div v-else-if="type === 'C'">
+			C
+		</div>
+		<div v-else>
+			Not A/B/C
+		</div>
+		<div v-if="loginType === 'username'">
+			<label>用户名</label>
+			<input placeholder="Enter your username">
+		</div>
+		<div v-else>
+			<label>邮箱</label>
+			<input placeholder="Enter your email address">
+		</div>
+		<template v-if="loginType === 'username'">
+			<label>用户名</label>
+			<input placeholder="Enter your username" key="username-input">
+		</template>
+		<template v-else>
+			<label>邮箱</label>
+			<input placeholder="Enter your email address" key="email-input">
+		</template>
+
+		<!-- 显示/隐藏 -->
+		<h1 v-show="ok">Hello!</h1>
+	</div>
+	<script>
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				ok: true,
+				isok: true,
+				type: 'B',
+				loginType: 'username'
+			},
+		});
+	</script>
+</body>
+
+</html>

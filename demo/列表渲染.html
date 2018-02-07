@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div v-for="n in 10">{{n}}</div>
+
+        <div v-for="(item,index) in list1">{{index}} {{item}}</div>
+        <div v-for="(value,kkey,index) in list2">{{index}} {{kkey}} {{value}}</div>
+        <div v-for="(item,index) in list3">{{index}} {{item}} {{item.message}}</div>
+        <ul>
+            <template v-for="(item,index) in list1">
+                <li>{{index}} {{item}}</li>
+            </template>
+        </ul>
+        <ul>
+            <template v-for="(value,key,index) in list2">
+                <li>{{index}} {{key}} {{value}}</li>
+            </template>
+        </ul>
+        <ul>
+            <template v-for="(item,index) in list3">
+                <li>{{index}} {{item}} {{item.message}}</li>
+            </template>
+        </ul>
+        <p>以下是组件的v-for</p>
+        <!--组件和v-for-->
+        <my-component1 v-for="(item,index) in list1" v-bind:item="item" v-bind:index="index"></my-component1>
+        <my-component2 v-for="(value,kkey,index) in list2" v-bind:value="value" v-bind:kkey="kkey" v-bind:index="index"></my-component2>
+        <my-component3 v-for="(item,index) in list3" v-bind:item="item" v-bind:index="index"></my-component3>
+
+    </div>
+    <script>
+        Vue.component('my-component1', {
+            props: ['item', 'index'],
+            template: '<li>{{index}} {{item}}</li>'
+        });
+        Vue.component('my-component2', {
+            props: ['value', 'kkey', 'index'],
+            template: '<li>{{index}} {{kkey}} {{value}}</li>'
+        });
+        Vue.component('my-component3', {
+            props: ['item', 'index'],
+            template: '<li>{{index}} {{item}} {{item.message}}</li>'
+        });
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                list1: ['aaa', 'bbb', 'ccc', 'ddd'], //数组
+                list2: { //对象
+                    key1: "A1",
+                    key2: "B1",
+                    key3: "C1",
+                    key4: "D1",
+                },
+                list3: [{ //对象数组
+                    id: 1001,
+                    message: "消息一"
+                }, {
+                    id: 1002,
+                    message: "消息二"
+                }, {
+                    id: 1003,
+                    message: "消息三"
+                }, {
+                    id: 1004,
+                    message: "消息四"
+                }]
+
+            }
+        })
+    </script>
+</body>
+
+</html>

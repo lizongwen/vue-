@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="../js/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<!-- 绑定class -->
+		<!-- 对象语法 -->
+		<div :class="{ isActive }">类名一</div>
+		<div :class="{ active: isActive }">类名二</div>
+		<div class="static" :class="{ active: isActive, 'text-danger': hasError }">类名三</div>
+		<div :class="classObject1">类名四</div>
+		<div :class="classObject2">类名五</div>
+		<!-- 数组语法 -->
+		<div :class="['class1','class2']">类名六</div>
+		<div :class="[activeClass, errorClass]">类名七</div>
+		<div :class="classArr">类名八</div>
+		<div :class="[isActive ? activeClass : '', errorClass]">类名九</div>
+		<div :class="[{ active: isActive }, errorClass]">类名十</div>
+		<!-- 绑定style样式 -->
+		<!-- 对象语法 -->
+		<div :style="{ color: activeColor, fontSize: fontSize + 'px' }">样式一</div>
+		<div :style="styleObject">样式二</div>
+		<!-- 数组语法 -->
+		<div v-bind:style="[baseStyles, overridingStyles]">样式三</div>
+		<div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }">样式四</div>
+	</div>
+	<script>
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				isActive: true,
+				hasError: false,
+				classObject1: {
+					active: true,
+					'text-danger': false
+				},
+				classArr:['class1','class2'],
+				activeClass: 'active',
+				errorClass: 'text-danger',
+				activeColor: 'red',
+				fontSize: 30,
+				styleObject: {
+					color: 'red',
+					fontSize: '13px'
+				},
+				baseStyles: {
+					fontSize: '20px'
+				},
+				overridingStyles: {
+					color: 'blue'
+				}
+			},
+			computed: {
+				classObject2: {
+					get: function () {
+						return {
+							active: !this.classObject1.active,
+							'text-danger': !this.classObject1['text-danger']
+							// active: this.isActive && !this.error,
+							// 'text-danger': this.error && this.error.type === 'fatal'
+						}
+					}
+				}
+			}
+		});
+	</script>
+</body>
+
+</html>

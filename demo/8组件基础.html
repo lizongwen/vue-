@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="../js/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<!-- 基础 -->
+		<component1>
+			<component2></component2>
+		</component1>
+		<component2></component2>
+		<component3></component3>
+		<table>
+			<tr is="component4"></tr>
+		</table>
+		<component5></component5>
+		<component5></component5>
+	</div>
+	<script>
+		Vue.component('component1', {
+			template: '<div>组件一</div>'
+		});
+		Vue.component('component3', {
+			template: '<div>{{content}}</div>',
+			data: function () {
+				return {
+					content: '组件三'
+				}
+			}
+		});
+		Vue.component('component5', {
+			template: '<button v-on:click="counter += 1">{{ counter }}</button>',
+			data: function () {
+				return { counter: 0 }
+			}
+		})
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				
+			},
+			components: {
+				// 局部组件将只在父组件模板中可用
+				component2: {
+					template: '<div>组件二</div>'
+				},
+				component4: {
+					template: `<tr><td>{{content}}</td></tr>`,
+					data: function () {
+						return {
+							content: '组件四'
+						}
+					}
+				}
+			},
+			created: function () {
+				console.log(this.childObj)
+			}
+		});
+	</script>
+</body>
+
+</html>

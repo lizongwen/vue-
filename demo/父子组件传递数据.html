@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <child my-msg-one="组件所在父实例的data数据!"></child>
+    </div>
+    <script>
+        Vue.component('child', {
+            props: ['myMsgOne'], //驼峰式写法
+            // 组件模板必须有一个唯一祖先元素
+            template: '<div><span>{{myMsgOne}}</span><br/><span>{{myMsgTwo}}</span><br/></div>',
+            data: function() {
+                return {
+                    'myMsgTwo': "组件自身data数据"
+                }
+            }
+        });
+        var vm1 = new Vue({
+            el: "#app"
+        })
+    </script>
+</body>
+
+</html>

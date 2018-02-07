@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <select v-model="selectedResult0">
+            <option>选项一</option>
+            <option>选项二</option>
+            <option>选项三</option>
+        </select>
+        <p>选择的值是：{{selectedResult0}}</p>
+        <select v-model="selectedResult1">
+            <option>选项一</option>
+            <option>选项二</option>
+            <option>选项三</option>
+        </select>
+        <p>选择的值是：{{selectedResult1}}</p>
+        <select v-model="selectedResult2">
+            <option value="a">选项一</option>
+            <option value="b">选项二</option>
+            <option value="c">选项三</option>
+        </select>
+        <p>选择的值是：{{selectedResult2}}</p>
+        <select v-model="selectedResult3" multiple>
+            <option>选项一</option>
+            <option>选项二</option>
+            <option>选项三</option>
+         </select>
+        <p>选择的值是：{{ selectedResult3 }}</p>
+        <select v-model="selectedResult4">
+            <option v-for="option in options" v-bind:value="option.value">{{ option.text }}</option>
+        </select>
+        <p>选择的值是：{{ selectedResult4 }}</p>
+        <select v-model="selectedResult5">
+            <!-- 内联对象字面量 -->
+            <option v-bind:value="{ number: 123 }">123</option>
+        </select>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                selectedResult0: "",
+                selectedResult1: "选项三",
+                selectedResult2: "b",
+                selectedResult3: [],
+                selectedResult4: '',
+                selectedResult5: "",
+                options: [{
+                    value: 'a',
+                    text: '选项一'
+                }, {
+                    value: 'b',
+                    text: '选项二'
+                }, {
+                    value: 'c',
+                    text: '选项三'
+                }]
+            }
+        })
+    </script>
+</body>
+
+</html>

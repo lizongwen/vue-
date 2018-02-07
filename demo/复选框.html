@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!--单个选复选框-->
+        <input type="checkbox" id="checkbox" v-model="singname0" value="JACK">v-model绑定的值：{{singname0}}
+        <br/>
+        <input type="checkbox" id="checkbox" v-model="singname1" value="JACK">v-model绑定的值：{{singname1}}
+        <br/>
+        <input type="checkbox" id="checkbox" v-model="singname2" value="JACK">v-model绑定的值：{{singname2}}
+        <br/>
+        <input type="checkbox" id="checkbox" v-model="singname3">v-model绑定的值：{{singname3}}
+        <br/>
+        <input type="checkbox" id="checkbox" v-model="singname4" value="JACK">v-model绑定的值：{{singname4}}
+        <br/>
+        <input type="checkbox" v-model="singname5" v-bind:true-value="a" v-bind:false-value="b">v-model绑定的值：{{ singname5 }}
+        <br/>
+        <input type="checkbox" id="checkbox" v-model="singname6" value="JACK">v-model绑定的值：{{singname6}}
+        <!--多个复选框-->
+        <p></p>
+        <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+        <label for="jack">Jack</label>
+        <input type="checkbox" id="john" value="John" v-model="checkedNames">
+        <label for="john">John</label>
+        <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+        <label for="mike">Mike</label>
+        <br>
+        <span>v-model绑定的值： {{ checkedNames }}</span>
+        <br>
+
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                singname0: "",
+                singname1: true,
+                singname2: "JACK",
+                singname3: "JACK",
+                singname4: "JOHN",
+                singname5: "",
+                a: "JACK",
+                b: "JOHN",
+                singname6: [],
+                checkedNames: ["Jack"]
+            }
+        })
+    </script>
+</body>
+
+</html>

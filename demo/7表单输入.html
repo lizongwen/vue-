@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="../js/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<!-- 单行文本 自定义的value属性失效 -->
+		<input type="text" v-model="username" type="text">
+		<p>username is: {{username}}</p>
+		<!-- 多行文本 -->
+		<div style="white-space: pre-line;">{{ multilineMsg }}</div>
+		<br>
+		<textarea v-model="multilineMsg" rows="10" cols="50"></textarea>
+		<!-- 复选框 -->
+		<div>
+			<!-- value不设定情况下，默认为on -->
+			<input type="checkbox">
+			<!-- :value绑定的值覆盖value设定的值 -->
+			<input type="checkbox" value="apple" :value="fruit">
+			<!-- v-model绑定checkbox -->
+			<div>
+				<!-- v-model绑定的值为字符串或者布尔值，点击会在true和false中切换，定义true-value/false-value属性将在它们的值之间切换 -->
+				<input type="checkbox" v-model="unchecked" true-value="a" false-value="b">{{unchecked}}
+				<input type="checkbox" v-model="checkValue" value="fruit" true-value="多选串" false-value="b">{{checkValue}}
+				<input type="checkbox" v-model="checkedText" value="fruit" true-value="选中" false-value="不选中">{{checkedText}}
+				<!-- v-model绑定的值为数组，点击会把绑定的value值传递到v-model绑定的变量数组里，未绑定value值将传递null -->
+				<input type="checkbox" v-model="checkArr" value="m">{{checkArr}}
+				<div>
+					<input type="checkbox" value="Jack" v-model="checkedNames">
+					<label for="jack">Jack</label>
+					<input type="checkbox" value="John" v-model="checkedNames">
+					<label for="john">John</label>
+					<input type="checkbox" value="Mike" v-model="checkedNames">
+					<label for="mike">Mike</label>
+					<br>
+					<span>Checked names: {{ checkedNames }}</span>
+				</div>
+			</div>
+		</div>
+		<!-- 单选框 点击会将绑定的value值传递给v-model绑定的变量，未绑定value值将传递null-->
+		<div>
+			<input type="radio" v-model="ispicked" value="a">
+			<span>{{ ispicked }}</span>
+			<input type="radio" v-model="pickedStr" value="b">
+			<span>{{ pickedStr }}</span>
+			<input type="radio" v-model="pickedStr2" value="单选串2">
+			<span>{{ pickedStr2 }}</span>
+			<input type="radio" v-model="pickedArr" value="c">
+			<span>{{ pickedArr }}</span>
+
+		</div>
+		<!-- 下拉单选框 选择后将选项的值赋给了v-model绑定的变量,option如果没有定义value默认是选项文本值 -->
+		<div>
+			<select v-model="singleSelectedStr1">
+				<option disabled value="">请选择</option>
+				<option :value="1">A</option>
+				<option :value="2">B</option>
+				<option :value="3">C</option>
+			</select>
+			<span>Selected: {{singleSelectedStr1 }}</span>
+			<!-- 换行-->
+			<br/>
+			<select v-model="singleSelectedStr2">
+				<option disabled value="">请选择</option>
+				<option :value="s1">A</option>
+				<option :value="s2">B</option>
+				<option :value="s3">C</option>
+			</select>
+			<span>Selected: {{singleSelectedStr2 }}</span>
+			<!-- 换行-->
+			<br/>
+			<select v-model="singleSelectedStr3">
+				<option disabled value="">请选择</option>
+				<option :value="{ number: 1 }">A</option>
+				<option :value="{ number: 2 }">B</option>
+				<option :value="{ number: 3 }">C</option>
+			</select>
+			<span>Selected: {{singleSelectedStr3 }}</span>
+		</div>
+		<!-- 下拉多选框 -->
+		<p></p>
+		<div>
+			<select v-model="multipleSelectedArr" multiple>
+				<option disabled value="">请选择</option>
+				<option>A</option>
+				<option>B</option>
+				<option>C</option>
+			</select>
+			<span>Selected: {{ multipleSelectedArr }}</span>
+		</div>
+	</div>
+	<script>
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				username: '土豆',
+				accountName: '小土豆',
+				multilineMsg: '多行文本',
+				fruit: 'orange',
+				unchecked: false,
+				checkValue: "初始多选字符串",
+				checkedText: '选中',
+				checkArr: [],
+				checkedNames: [],
+				ispicked: true,
+				pickedStr: "单选串",
+				pickedStr2: '单选串2',
+				pickedArr: [],
+				singleSelectedStr1: '',
+				singleSelectedStr2: '',
+				singleSelectedStr3: '',
+				multipleSelectedArr: ['A'],
+				selected: '',
+				s1: 's1',
+				s2: 's2',
+				s3: 's3'
+			}
+		});
+	</script>
+</body>
+
+</html>

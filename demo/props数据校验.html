@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="parentMsg" />
+        <!--v-bind绑定的my-msg-one的对应值parentMsg指向一个变量-->
+        <child v-bind:my-msg-one="parentMsg"></child>
+    </div>
+    <script>
+        Vue.component('child', {
+            props: {
+                'myMsgOne': Number
+            },
+            // 组件模板必须有一个唯一祖先元素
+            template: '<div><span>{{myMsgOne}}</span></div>'
+        });
+        var vm1 = new Vue({
+            el: "#app",
+            data: {
+                parentMsg: 5 //parentMsg在组件中被验证只能为Number型
+            }
+        })
+    </script>
+</body>
+
+</html>

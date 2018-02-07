@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!--子组件绑定监听自定义事件-->
+        <child v-on:parent_add="add"></child>
+        <div>{{number}}</div>
+    </div>
+    <script>
+        Vue.component('child', {
+            template: '<button type="button" v-on:click="add">{{num}}</button>', //组件模板绑定监听事件
+            data: function() {
+                return {
+                    num: 0
+                }
+            },
+            methods: {
+                add: function() {
+                    ++this.num;
+                    this.$emit('parent_add'); //执行parent_add自定义事件
+                }
+            }
+        });
+        var vm1 = new Vue({
+            el: "#app",
+            data: {
+                number: 0
+            },
+            methods: {
+                add: function() {
+                    ++this.number
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

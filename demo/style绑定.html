@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div v-bind:style="{ color: 'red', fontSize: '30px' }">样式</div>
+        <div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }">样式</div>
+        <div v-bind:style="style1">样式</div>
+        <div v-bind:style="[baseStyles, overridingStyles]">样式</div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                activeColor: 'red',
+                fontSize: 30,
+                style1: {
+                    color: 'red',
+                    fontSize: '30px',
+                },
+                baseStyles: {
+                    color: 'red'
+                },
+                overridingStyles: {
+                    fontSize: '30px'
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

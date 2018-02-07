@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div v-if="isTrue">
+            <div>Yes</div>
+        </div>
+        <div v-else>
+            <div>no</div>
+        </div>
+        <div v-if="isFalse">
+            <div>真</div>
+        </div>
+        <div v-else>
+            <div>假</div>
+        </div>
+
+        <template v-if="ok">
+            <h1>Title</h1>
+            <p>Paragraph 1</p>
+            <p>Paragraph 2</p>
+        </template>
+
+        <div v-if="type === 'A'">A</div>
+        <div v-else-if="type === 'B'">B</div>
+        <div v-else-if="type === 'C'">C</div>
+        <div v-else>Not A/B/C</div>
+
+        <!--v-show语句-->
+        <div v-show="isshow">v-show条件显示</div>
+        <button id="button" class="button">点我</button>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                isTrue: true,
+                isFalse: false,
+                ok: true,
+                type: "B",
+                isshow: true
+            }
+        })
+        document.getElementById("button").onclick = function() {
+            vm.ok = false;
+        }
+    </script>
+</body>
+
+</html>

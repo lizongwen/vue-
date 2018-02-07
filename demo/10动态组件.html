@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="../js/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<button @click="change('component1')">切换组件</button>
+		<button @click="change('component2')">切换组件</button>
+		<button @click="change('component3')">切换组件</button>
+		<component :is="current" ></component>
+	</div>
+	<script>
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				current:'component1'
+			},
+			components: {
+				component1: {
+					template: `<div>组件一</div>`,
+				},
+				component2: {
+					template: `<div>组件二</div>`,
+				},
+				component3: {
+					template: `<div>组件三</div>`,
+				}
+			},
+			methods:{
+				change:function(current){
+					this.current=current;
+				}
+			}
+		});
+	</script>
+</body>
+
+</html>

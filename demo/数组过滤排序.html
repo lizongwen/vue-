@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <span v-for="item in numbers">{{item}}</span>
+        </div>
+        <div>
+            <span v-for="item in evenNumbers">{{item}}</span>
+        </div>
+        <div>
+            <span v-for="item in oddNumbers()">{{item}}</span>
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9] //数组
+            },
+            computed: {
+                // 数组过滤
+                evenNumbers: function() {
+                    return this.numbers.filter(function(number) {
+                        return number % 2 == 0;
+                    })
+                }
+            },
+            methods: {
+                oddNumbers: function() {
+                    return this.numbers.filter(function(number) {
+                        return number % 2 != 0;
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

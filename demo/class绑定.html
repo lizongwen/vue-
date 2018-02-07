@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!--class="main_top main_bottom"的几种写法-->
+        <!--直接绑定字符串-->
+        <div v-bind:class="'main_top0 main_bottom0'">头部DIV</div>
+        <!--绑定字符串变量-->
+        <div v-bind:class="str">头部DIV</div>
+        <!--**************************************-->
+        <!--直接绑定数组-->
+        <div v-bind:class="['main_top2','main_bottom2']">头部DIV</div>
+        <!--绑定数组变量-->
+        <div v-bind:class="[arry1,arry2]">头部DIV</div>
+        <!--**************************************-->
+        <!--直接绑定对象-->
+        <div v-bind:class="{main_top4:true,main_bottom4:true}">头部DIV</div>
+        <!--绑定对象变量1-->
+        <div v-bind:class="{main_top5,main_bottom5}">头部DIV</div>
+        <!--绑定对象变量2-->
+        <div v-bind:class="{main_top6:obj1,main_bottom6:obj2}">头部DIV</div>
+        <!--绑定对象变量3-->
+        <div v-bind:class="obj3">头部DIV</div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                str: 'main_top1 main_bottom1',
+                arry1: 'main_top3',
+                arry2: 'main_bottom3',
+                main_top5: true,
+                main_bottom5: true,
+                obj1: true,
+                obj2: true,
+                obj3: {
+                    'main_top7': true,
+                    'main_bottom7': true
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

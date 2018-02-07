@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="../js/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<div>
+			<button @click="counter += 1">+ 1</button>
+			<p>上面的按钮被点击了 {{ counter }} 次.</p>
+		</div>
+		<div>
+			<button @click="greet">greet</button>
+		</div>
+		<div>
+			<button @click="say('hi')">Say hi</button>
+			<button @click="say('what')">Say what</button>
+		</div>
+		<div>
+			<button v-on:click="warn('Form cannot be submitted yet.', $event)">提交</button>
+		</div>
+		<div>
+			<!-- 阻止单击事件继续传播 -->
+			<div v-on:click.stop="doThis">
+				<div @click.stop="inTodo">
+					阻止单击事件继续传播
+				</div>
+			</div>
+			<!-- 提交事件不再重载页面 -->
+			<form v-on:submit.prevent="onSubmit">
+				<input type="submit" name="submit" value="提交事件不再重载页面">
+			</form>
+			<!-- 修饰符可以串联 -->
+			<a v-on:click.stop.prevent="doThat">修饰符可以串联</a>
+			<!-- 只有修饰符 -->
+			<form v-on:submit.prevent></form>
+			<!-- 添加事件监听器时使用事件捕获模式 -->
+			<!-- 即内部元素触发的事件先在此处处理，然后才交由内部元素自身进行处理 -->
+			<div @click="outerTodo">
+				<div v-on:click.capture="outTodo">
+					<div @click="inTodo">
+						<div @click="innerTodo">
+							事件捕获模式
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 只当在 event.target 是当前元素自身时触发处理函数 -->
+			<!-- 即事件不是从内部元素触发的 -->
+			<div @click="outerTodo">
+				<div v-on:click.self="outTodo">
+					<div @click="inTodo">
+						当前元素自身时触发处理函数
+					</div>
+				</div>
+			</div>
+		</div>
+		<div>
+			<a v-on:click.once="doThings">只触发一次</a>
+		</div>
+		<div>
+			<div @click="handle_a">触发下面按钮点击事件</div>
+			<div v-on:click="doThings" ref='send1'>发送</div>
+
+			<!-- <div @click="handle_b">触发下面按钮自定义事件</div>
+			<div v-on:delimit="doThings">发送</div> -->
+		</div>
+		<div>
+			<input v-on:keyup.13="submit" value="按键提交" type="button">
+		</div>
+		<div>
+			<child v-on:parent_fun="doThings"></child>
+		</div>
+	</div>
+	<script>
+		 Vue.component('child', {
+            // 组件模板必须有一个唯一祖先元素
+            template: '<button type="button" v-on:click="add">子组件按钮</button>', //组件模板绑定监听事件
+            data: function() {
+                return {
+                    
+                }
+            },
+			methods: {
+                add: function() {
+                   console.log('子组件绑定事件');
+                   this.$emit('parent_fun'); //执行parent_add自定义事件
+                }
+            }
+        });
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				counter: 0,
+				name: 'vuejs'
+			},
+			methods: {
+				greet(event) {
+					console.log(event);
+					// `this` 在方法里指向当前 Vue 实例
+					console.log('Hello ' + this.name + '!');
+					// `event` 是原生 DOM 事件
+					if (event) {
+						console.log(event.target.tagName);
+					}
+				},
+				say(msg) {
+					console.log(event);
+					console.log(msg);
+					if (event) {
+						console.log(event.target.tagName);
+					}
+				},
+				warn(message, event) {
+					console.log(event);
+					if (event) event.preventDefault();
+					console.log(message);
+				},
+				doThings() {
+					console.log('做一些事')
+				},
+				doThis() {
+					console.log('阻止单击事件继续传播');
+				},
+				onSubmit() {
+					console.log('提交事件不再重载页面');
+				},
+				doThat() {
+					console.log('修饰符可以串联');
+				},
+				inTodo() {
+					console.log('内层元素');
+				},
+				outTodo() {
+					console.log('外层元素');
+				},
+				innerTodo() {
+					console.log('最内层元素');
+				},
+				outerTodo() {
+					console.log('最外层元素');
+				},
+				handle_a() {
+					console.log('当前事件触发的处理函数');
+					this.$refs.send1.click()
+				},
+				// handle_b() {
+				// 	console.log('当前事件触发的处理函数');
+					// this.$emit('delimit')
+				// },
+				submit() {
+					console.log('按键处理');
+				}
+			}
+		});
+	</script>
+</body>
+
+</html>

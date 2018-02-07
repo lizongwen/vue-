@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div v-html="count"></div>
+        <button v-on:click="dialog()" type="button">按钮</button>
+        <button v-on:click="warn('Form cannot be submitted yet.', $event)">提交</button>
+
+        <!--点击事件修饰符-->
+        <!-- 阻止单击事件冒泡 -->
+        <a v-on:click.stop="doThis" href="http://www.baidu.com">提交</a>
+        <!-- 阻止默认事件 -->
+        <a v-on:click.prevent="doThis" href="http://www.baidu.com">提交</a>
+        <!-- 点击事件将只会触发一次 -->
+        <a v-on:click.prevent.once="doThis" href="http://www.baidu.com">提交一次</a>
+
+
+        <!--按键修饰符-->
+        <!--按下enter键会执行doThis方法-->
+        <input v-on:keyup.13="doThis" />
+        <input v-on:keyup.enter="doThis" />
+
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                count: 1
+            },
+            methods: {
+                dialog: function() {
+                    this.count++;
+                },
+                warn: function(message, event) {
+                    // 现在我们可以访问原生事件对象
+                    if (event) {
+                        event.preventDefault()
+                    }
+                    alert(message + event.target.nodeName);
+                },
+                doThis: function() {
+                    alert(123)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

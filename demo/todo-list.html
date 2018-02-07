@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input v-model="newTodoText" v-on:keyup.enter="addNewTodo" placeholder="添加一行">
+        <input type="button" v-on:click="updateArr('二')" value="筛选第一个列表某个值">
+        <ul>
+            <li is="todo-item1" v-for="(item, index) in todos1" v-bind:item="item" v-bind:todos="todos1" v-bind:index="index"></li>
+        </ul>
+        <ul>
+            <li is="todo-item2" v-for="(item, index) in todos2" v-bind:item="item" v-on:remove="todos2.splice(index, 1)"></li>
+        </ul>
+    </div>
+    <script>
+        Vue.component('todo-item1', {
+            template: '<li>{{ item }}<button v-on:click="todos.splice(index, 1)">X</button></li>',
+            props: ['item', 'todos', 'index']
+        });
+
+        Vue.component('todo-item2', {
+            template: '<li>{{item}}<button v-on:click="$emit(\'remove\')">X</button></li>',
+            props: ['item']
+        });
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                newTodoText: '',
+                todos1: [
+                    '第一行',
+                    '第二行',
+                    '第三行'
+                ],
+                todos2: [
+                    '第四行',
+                    '第五行',
+                    '第六行'
+                ]
+            },
+            methods: {
+                addNewTodo: function() {
+                    this.todos1.push(this.newTodoText);
+                    this.todos2.push(this.newTodoText)
+                    this.newTodoText = ''
+                },
+                updateArr: function(vvalue) {
+                    var reg = new RegExp(vvalue);
+                    console.log(reg)
+                    this.todos1 = this.todos1.filter(function(item) {
+                        console.log(item);
+                        return item.match(reg);
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

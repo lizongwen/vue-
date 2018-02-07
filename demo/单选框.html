@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!--当v-model的绑定值和value值相等的情况下radio会被选中-->
+        <input id="radio1" type="radio" v-model="data1">{{ data1 }}
+        <br/>
+        <input id="radio1" type="radio" v-model="data2">{{ data2 }}
+        <br/>
+        <input id="radio2" type="radio" v-model="data3" value="">{{ data3 }}
+        <br/>
+        <input id="radio2" type="radio" v-model="data4" value="data4value">{{ data4 }}
+        <br/>
+        <input id="radio3" type="radio" v-model="data5" value="data5value">{{ data5 }}
+        <br/>
+        <!--单选切换-->
+        <input type="radio" id="one" value="One" v-model="picked">
+        <label for="one">One</label>
+        <br>
+        <input type="radio" id="two" value="Two" v-model="picked">
+        <label for="two">Two</label>
+        <br>
+        <span>Picked: {{ picked }}</span>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                data1: true,
+                data2: "",
+                data3: "",
+                data4: "",
+                data5: "data5value",
+                picked: ''
+            }
+        })
+    </script>
+</body>
+
+</html>
