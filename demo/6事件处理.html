@@ -100,8 +100,10 @@
 				name: 'vuejs'
 			},
 			methods: {
-				greet(event) {
-					console.log(event);
+				// 系统自带event对象始终被传递到函数内部，同时函数不带参数，系统event对象会传递到arguments中作为第一个参数
+				greet() {
+					console.log(arguments)//传递过来的实参集合
+					console.log(event)//系统自带事件对象，名称不可改变
 					// `this` 在方法里指向当前 Vue 实例
 					console.log('Hello ' + this.name + '!');
 					// `event` 是原生 DOM 事件
@@ -109,15 +111,20 @@
 						console.log(event.target.tagName);
 					}
 				},
+				// 系统自带event对象始终被传递到函数内部，函数带参数，系统event对象不会传递到arguments中
 				say(msg) {
-					console.log(event);
+					console.log(arguments)//传递过来的实参集合
+					console.log(event);//系统自带事件对象，名称不可改变
 					console.log(msg);
 					if (event) {
 						console.log(event.target.tagName);
 					}
 				},
-				warn(message, event) {
-					console.log(event);
+				// 系统自带event对象始终被传递到函数内部，函数带$event参数,可以将事件对象传递到arguments中
+				warn(message,e) {
+					console.log(arguments)//传递过来的实参集合
+					console.log(event);//系统自带事件对象，名称不可改变
+					console.log(e)//传递过来的事件对象，名称可随意
 					if (event) event.preventDefault();
 					console.log(message);
 				},
