@@ -12,8 +12,8 @@
 	<div id="app">
 		<h1>我是父组件的标题</h1>
 		<component-one>
-			<p>这是一些初始内容</p>
-			<p>这是更多的初始内容</p>
+			<p>1、这是一些初始内容</p>
+			<p>2、这是更多的初始内容</p>
 		</component-one>
 		<component-two>
 			<h1 slot="header">这里可能是一个页面标题</h1>
@@ -22,9 +22,13 @@
 			<p slot="footer">这里有一些联系信息</p>
 		</component-two>
 		<component-three>
+			<!-- 通过临时变量props访问来自子组件的数据text -->
 			<template slot-scope="props">
-				<span>hello from parent</span>
-				<span>{{ props.text }}</span>
+				<div>
+					<span>hello from parent</span>
+					<span>{{ props}}</span>
+				</div>
+
 			</template>
 		</component-three>
 	</div>
@@ -33,7 +37,7 @@
 			el: "#app",
 			components: {
 				'component-one': {
-					template: `<div><h2>我是子组件的标题</h2><slot>只有在没有要分发的内容时才会显示。</slot></div>`,
+					template: `<div><h2>我是子组件的标题</h2>slot分发内容：<slot>只有在没有要分发的内容时才会显示。</slot></div>`,
 
 				},
 				// 具名slot
@@ -50,10 +54,16 @@
 									</footer>
 								</div>`
 				},
+				// 作用域插槽
 				'component-three': {
 					template: `<div class="child">
-									<slot text="hello from child"></slot>
-								</div>`
+									<slot text="massage" :content-id="id" v-for="n in 10"></slot>
+								</div>`,
+					data: function () {
+						return {
+							id: '1-1'
+						}
+					}
 				}
 			}
 		})
