@@ -14,10 +14,15 @@
 		<component2 v-bind="childObj"></component2>
 		<component3 v-bind="childObj"></component3>
 		<!-- 这种传递数据方式在单个html文件里名称不能一致，例如不能用v-bind:childObj1="childObj1" -->
+		{{childObj1}}
 		<component4 v-bind:obj="childObj1"></component4>
 		<!-- 注意props驼峰式变量，需要在这里用“-”连接 -->
 		<component5 :initial-counter="initial"></component5>
 		<component6 :letter="letter"></component6>
+		<!-- props驼峰变量，需要在组件上设置短横线变量 -->
+		<component7 :camel-case="camelCase"></component7>
+
+
 	</div>
 	<script>
 		var vm = new Vue({
@@ -26,16 +31,17 @@
 				message: '组件一',
 				childObj: {
 					text: 'Learn Vue',
-					message: '组件七',
+					message: '组件二',
 					isComplete: true
 				},
 				childObj1: {
 					text: 'Learn Vue',
-					message: '组件八',
+					message: '组件四',
 					isComplete: true
 				},
 				initial: 1,
-				letter: 'A'
+				letter: 'A',
+				camelCase:'组件七'
 			},
 			components: {
 				component1: {
@@ -57,7 +63,7 @@
 					}
 				},
 				component4: {
-					template: `<div><div><div>{{obj}}</div></div><div>{{newObj}}</div></div>`,
+					template: `<div><div><div>{{obj}}</div></div><div>{{newObj}}</div><div>{{newObj1}}</div></div>`,
 					props: {
 						obj: {
 							type: Object
@@ -66,8 +72,13 @@
 					data: function () {
 						return {
 							newObj: (() => {
-								this.obj.text='新内容';
+								this.obj.text='新内容';	
 								return '内容:' + this.obj.text
+							})(),
+							newObj1:(()=>{
+								var _obj=this.obj;
+								_obj.isComplete=false;
+								return _obj;
 							})()
 						}
 					}
@@ -88,6 +99,10 @@
 							return this.letter.trim().toLowerCase()
 						}
 					}
+				},
+				component7: {
+					template: `<div>{{camelCase}}</div>`,
+					props: ['camelCase']
 				}
 
 			}

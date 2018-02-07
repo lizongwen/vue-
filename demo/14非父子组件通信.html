@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="../js/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<component-one></component-one>
+		<component-two></component-two>
+	</div>
+	<script>
+		var bus = new Vue();
+		var vm = new Vue({
+			el: "#app",
+			components: {
+				'component-one': {
+					template: `<div v-on:click="sendmsg1">{{data1}}</div>`,
+					methods: {
+						sendmsg1: function () {
+							bus.$emit("sendmsg1", this.data1);
+						}
+					},
+					data: function () {
+						return {
+							data1: "组件1"
+						}
+					},
+					created: function () {
+						var that = this
+						bus.$on("sendmsg2", function (rs) {
+							that.data1 = rs;
+						})
+					}
+				},
+				'component-two': {
+					template: `<div v-on:click="sendmsg2">{{data1}}</div>`,
+					methods: {
+						sendmsg2: function () {
+							bus.$emit("sendmsg2", this.data1);
+						}
+					},
+					data: function () {
+						return {
+							data1: "组件2"
+						}
+					},
+					created: function () {
+						var that = this
+						bus.$on("sendmsg1", function (rs) {
+							that.data1 = rs;
+						})
+					}
+				}
+			}
+		})
+	</script>
+</body>
+
+</html>

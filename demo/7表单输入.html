@@ -26,6 +26,7 @@
 			<!-- v-model绑定checkbox -->
 			<div>
 				<!-- v-model绑定的值为字符串或者布尔值，点击会在true和false中切换，定义true-value/false-value属性将在它们的值之间切换 -->
+				<input type="checkbox" v-model="checked">{{checked}}
 				<input type="checkbox" v-model="unchecked" true-value="a" false-value="b">{{unchecked}}
 				<input type="checkbox" v-model="checkValue" value="fruit" true-value="多选串" false-value="b">{{checkValue}}
 				<input type="checkbox" v-model="checkedText" value="fruit" true-value="选中" false-value="不选中">{{checkedText}}
@@ -103,6 +104,7 @@
 				accountName: '小土豆',
 				multilineMsg: '多行文本',
 				fruit: 'orange',
+				checked:true,
 				unchecked: false,
 				checkValue: "初始多选字符串",
 				checkedText: '选中',

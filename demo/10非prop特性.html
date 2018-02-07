@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="../js/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<!--class会传递到子组件根元素  -->
+		<component1 :message="message1" class="component-wrapper"></component1>
+		<!--class会传递与子组件根元素class合并，id会覆盖子组件根元素的id  -->
+		<component2 :message="message2" class="component-wrapper" id="1"></component2>
+	</div>
+	<script>
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				message1:'组件一',
+				message2:'组件二'
+			},
+			components: {
+				component1: {
+					template: `<div>{{message}}</div>`,
+					props: ['message']
+				},
+				component2:{
+					template: `<div class="main" id="2">{{message}}</div>`,
+					props: ['message']
+				}
+			}
+		});
+	</script>
+</body>
+
+</html>

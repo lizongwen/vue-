@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="../js/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		{{bar}}
+		<comp :foo.sync="bar"></comp>
+	</div>
+	<script>
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				bar:'修改前-aaa',
+			},
+			components: {
+				comp: {
+					template: '<button v-on:click="handle(\'修改前-bbb\')">修改</button>',
+					props: {
+						foo: {
+							type: String
+						}
+					},
+					methods: {
+						handle: function (newValue) {
+							this.$emit('update:foo', newValue)
+						}
+					}
+				}
+			}
+		});
+	</script>
+</body>
+
+</html>
