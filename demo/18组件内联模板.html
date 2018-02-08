@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="../js/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<comp inline-template>
+			<!-- 必须有一个父节点 -->
+			<div>
+				<div>{{message}}</div>
+				<div>{{msg}}</div>
+				<div>{{number}}</div>
+			</div>
+
+		</comp>
+	</div>
+	<script>
+		Vue.component('comp', {
+			data: function () {
+				return {
+					msg: '子组件',
+					number: 0
+				}
+			}
+		})
+		var vm = new Vue({
+			el: "#app",
+			data: {
+				message: '父组件'
+			}
+		})
+	</script>
+</body>
+
+</html>

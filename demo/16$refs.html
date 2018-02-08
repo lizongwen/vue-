@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="../js/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<h1 ref="h1" id="title">我是父组件的标题</h1>
+		<component-one ref="comp"></component-one>
+		
+	</div>
+	<script>
+		var vm = new Vue({
+			el: "#app",
+			components: {
+				'component-one': {
+					template: `<div><h2>我是{{value}}的标题</h2></div>`,
+					data:function(){
+						return {
+							value:'子组件'
+						}
+					}
+
+				},
+			},
+			mounted:function(){
+				console.log(this.$refs.h1)//<h1>我是父组件的标题</h1>
+				console.log(this.$refs.comp.value)
+			}
+		})
+	</script>
+</body>
+
+</html>

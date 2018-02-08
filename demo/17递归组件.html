@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="../js/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<component-one :count="10">父组件</component-one>
+	</div>
+	<script>
+		var vm = new Vue({
+			el: "#app",
+			components: {
+				'component-one': {
+					name:'component-one',
+					template: `<div class="child">{{count}}<slot></slot><component-one :count="count-1" v-if="count>0">{{count}}<slot></slot>{{count}}子组件</component-one></div>`,
+					props:{
+						count:{
+							type:Number,
+							default:1
+						}
+					}
+				},
+			}
+		})
+	</script>
+</body>
+
+</html>

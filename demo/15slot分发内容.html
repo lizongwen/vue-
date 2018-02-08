@@ -52,7 +52,14 @@
 									<footer>
 										<slot name="footer"></slot>
 									</footer>
-								</div>`
+								</div>`,
+					// 通过$slots访问slot
+					mounted:function(){
+						let header=this.$slots.header;
+						let main=this.$slots.default;
+						let footer=this.$slots.footer;
+						console.log(header)
+					}
 				},
 				// 作用域插槽
 				'component-three': {
