@@ -31,6 +31,11 @@
 
 			</template>
 		</component-three>
+		<!-- 组件嵌套使用slot -->
+		<parent>
+			<child-header>header</child-header>
+			<child-body>body</child-body>
+		</parent>
 	</div>
 	<script>
 		var vm = new Vue({
@@ -71,6 +76,15 @@
 							id: '1-1'
 						}
 					}
+				},
+				'parent':{
+					template: `<div>我是父亲<slot></slot></div>`,
+				},
+				'child-header':{
+					template: `<div>我是儿子头部<slot></slot></div>`,
+				},
+				'child-body':{
+					template: `<div>我是儿子身体<slot></slot></div>`,
 				}
 			}
 		})
