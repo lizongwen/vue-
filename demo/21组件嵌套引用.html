@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="../js/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<!-- 组件嵌套使用slot -->
+		<parent>
+			<child-header>header</child-header>
+			<child-body>body</child-body>
+		</parent>
+		<!-- 组件嵌套引用一 -->
+		<div v-for="folder in folders" class="item">
+			<tree-folder v-bind:folder="folder"></tree-folder>
+		</div>
+		<hr>
+		<!-- 组件嵌套引用二 -->
+		<div v-for="folder in folders_1" class="item">
+			<tree-folder v-bind:folder="folder"></tree-folder>
+		</div>
+		<hr>
+		<!-- 组件嵌套引用三 -->
+		<tree-folder v-bind:folder="folders_1[0]"></tree-folder>
+		<hr>
+		<!-- 组件嵌套引用四 -->
+		<tree-folder></tree-folder>
+	</div>
+	<script>
+		// 注册全局组件，注册局部组件报错
+		Vue.component('tree-folder', {
+			props: {
+				folder: {
+					type: Object,
+					default: function () {
+						return {
+							name: 'folderA',
+							children: [{
+								name: 'folderA-folderA',
+								children: [{
+									name: 'folderA-folderA-folderA'
+								}]
+							}, {
+								name: 'folderA-folderB',
+								children: [{
+									name: 'folderA-folderB-folderA'
+								}, {
+									name: 'folderA-folderB-folderB'
+								}]
+							}, {
+								name: 'folderA-folderC',
+							}]
+						}
+					}
+				}
+			},
+			template: `<div class="tree-folder">
+						<span>{{ folder.name }}</span>
+						<tree-folder-contents :children="folder.children"></tree-folder-contents>
+					</div>`,
+		})
+
+		Vue.component('tree-folder-contents', {
+			props: ['children'],
+			template: `<ul class="tree-folder-contents">
+						<li v-for="child in children">
+							<tree-folder v-if="child.children" :folder="child"/>
+							<span v-else>{{ child.name }}</span>
+						</li>
+					</ul>`
+		})
+
+		var vm = new Vue({
+			el: "#app",
+			components: {
+				'parent': {
+					template: `<div>我是父亲<slot></slot></div>`,
+				},
+				'child-header': {
+					template: `<div>我是儿子头部<slot></slot></div>`,
+				},
+				'child-body': {
+					template: `<div>我是儿子身体<slot></slot></div>`,
+				}
+			},
+			data: {
+				folders: [{
+					name: 'folder1',
+					children: [{
+						name: 'folder1-folder1',
+						children: [{
+							name: 'folder1-folder1-folder1'
+						}]
+					}, {
+						name: 'folder1-folder2',
+						children: [{
+							name: 'folder1-folder2-folder1'
+						}, {
+							name: 'folder1-folder2-folder2'
+						}]
+					}, {
+						name: 'folder1-folder3',
+					}]
+				}, {
+					name: 'folder 2',
+					children: [{
+						name: 'folder2-folder1',
+						children: [{
+							name: 'folder2-folder1-folder1'
+						}]
+					}, {
+						name: 'folder2-folder2',
+						children: [{
+							name: 'folder2-content1'
+						}]
+					}]
+				}, {
+					name: 'folder 3',
+					children: [{
+						name: 'folder3-folder1',
+						children: [{
+							name: 'folder3-folder1-folder1'
+						}]
+					}, {
+						name: 'folder3-folder2',
+						children: [{
+							name: 'folder3-content1'
+						}]
+					}]
+				}],
+				folders_1: [{
+					name: 'folder1',
+					children: [{
+						name: 'folder1-folder1',
+						children: [{
+							name: 'folder1-folder1-folder1'
+						}]
+					}, {
+						name: 'folder1-folder2',
+						children: [{
+							name: 'folder1-folder2-folder1'
+						}, {
+							name: 'folder1-folder2-folder2'
+						}]
+					}, {
+						name: 'folder1-folder3',
+					}]
+				}]
+			}
+		})
+	</script>
+</body>
+
+</html>

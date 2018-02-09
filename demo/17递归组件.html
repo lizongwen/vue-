@@ -18,7 +18,9 @@
 			components: {
 				'component-one': {
 					name:'component-one',
-					template: `<div class="child">{{count}}<slot></slot><component-one :count="count-1" v-if="count>0">{{count}}<slot></slot>{{count}}子组件</component-one></div>`,
+					template: `<div class="child">{{count}}<slot></slot>
+								<component-one :count="count-1" v-if="count>0">{{count}}<slot></slot>{{count}}子组件</component-one>
+							</div>`,
 					props:{
 						count:{
 							type:Number,

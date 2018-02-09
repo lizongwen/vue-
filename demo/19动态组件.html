@@ -13,7 +13,10 @@
 		<button @click="change('component1')">切换组件</button>
 		<button @click="change('component2')">切换组件</button>
 		<button @click="change('component3')">切换组件</button>
-		<component :is="current" ></component>
+		<button @click="change('component4')">切换组件</button>
+		<keep-alive>
+			<component :is="current" ></component>
+		</keep-alive>
 	</div>
 	<script>
 		var vm = new Vue({
@@ -30,6 +33,9 @@
 				},
 				component3: {
 					template: `<div>组件三</div>`,
+				},
+				component4: {
+					template: `<div>组件四</div>`,
 				}
 			},
 			methods:{
