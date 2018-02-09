@@ -10,11 +10,6 @@
 
 <body>
 	<div id="app">
-		<!-- 组件嵌套使用slot -->
-		<parent>
-			<child-header>header</child-header>
-			<child-body>body</child-body>
-		</parent>
 		<!-- 组件嵌套引用一 -->
 		<div v-for="folder in folders" class="item">
 			<tree-folder v-bind:folder="folder"></tree-folder>
