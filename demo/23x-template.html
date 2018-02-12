@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="../js/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<comp></comp>
+		<script type="text/x-template" id="comp-tmpl">
+			<div>子组件</div>
+		</script>
+	</div>
+	<script>
+		var vm = new Vue({
+			el: "#app",
+			data: {
+				message: '父组件'
+			},
+			components: {
+				'comp': {
+					template:'#comp-tmpl'
+				}
+			}
+		});
+	</script>
+</body>
+
+</html>
