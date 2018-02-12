@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="../js/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<button @click="foo">按钮一</button>
+		<button @click="bar">按钮二</button>
+		<button @click="conflicting">按钮三</button>
+	</div>
+	<script>
+		var mixin = {
+			data: function () {
+				return {
+					data1: 'hello',
+					data2: 'abc'
+				}
+			},
+			// 混入对象的钩子先调用
+			created: function () {
+				console.log('混入对象的钩子被调用')
+			},
+			methods: {
+				foo: function () {
+					console.log('foo')
+				},
+				conflicting: function () {
+					console.log('from mixin')
+				}
+			}
+		}
+		
+		// 混入可以用在new Vue方法下参数
+		var vm = new Vue({
+			el: "#app",
+			mixins: [mixin],
+			data: function () {
+				return {
+					data1: 'goodbye',
+					data3: 'def'
+				}
+			},
+			// '组件钩子后调用
+			created: function () {
+				console.log('组件钩子被调用', this.$data)
+				// => { message: "goodbye", foo: "abc", bar: "def" }
+			},
+			methods: {
+				bar: function () {
+					console.log('bar')
+				},
+				// 与混入同名的函数，混入的函数被替换。
+				conflicting: function () {
+					console.log('from self')
+				}
+			}
+		})
+	</script>
+</body>
+
+</html>
