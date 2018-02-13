@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="../js/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<input v-focus>
+	</div>
+	<script>
+		// 注册一个全局自定义指令 `v-focus`
+		Vue.directive('focus', {
+			// 当被绑定的元素插入到 DOM 中时
+			inserted: function (el) {
+				// 聚焦元素
+				el.focus()
+			}
+		})
+
+		// 混入可以用在new Vue方法下参数
+		var vm = new Vue({
+			el: '#app'
+		})
+	</script>
+</body>
+
+</html>
