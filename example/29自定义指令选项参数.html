@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="../js/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<div v-test1:msg.a.b="message">自定义指令1</div>
+		<!-- 绑定多个值 -->
+		<div v-test2="{msg:'hello',name:'Aresn'}">自定义指令2</div>
+		<div v-test3="'#f0f'">自定义指令3</div>
+	</div>
+	<script>
+		// 注册一个全局自定义指令 `v-focus`
+		Vue.directive('test1', {
+			// 当被绑定的元素插入到 DOM 中时
+			bind: function (el, binding, vnode) {
+				let keys = [];
+				console.log(binding)
+				console.log(vnode)
+				for (let i in vnode) {
+					keys.push(i)
+				}
+				el.innerHTML = 'name: ' + binding.name + '<br>' + 'value: ' + binding.value + '<br>' +
+					'expression: ' + binding.expression + '<br>' + 'argument: ' + binding.arg + '<br>' +
+					'modifiers: ' + JSON.stringify(binding.modifiers) + '<br>' + 'vnode keys: ' + keys.join(', ')
+			}
+		})
+		Vue.directive('test2', {
+			// 当被绑定的元素插入到 DOM 中时
+			bind: function (el, binding, vnode) {
+				console.log(binding.value)
+			}
+		})
+
+		// 函数简写方式配置
+		Vue.directive('test3', function (el, binding) {
+			el.style.backgroundColor = binding.value
+		})
+
+		// 混入可以用在new Vue方法下参数
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				message: 'some text',
+				green:'green'
+			}
+		})
+	</script>
+</body>
+
+</html>
