@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="../js/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<anchored-heading :level="2" :title="'标题'">Hello world!</anchored-heading>
+	</div>
+	<script>
+		let vm = new Vue({
+			el: '#app',
+			components: {
+				'anchored-heading': {
+					render: function (createElement) {
+						// createElement方法第一个参数为字符串的情况
+						// 第二个参数为对象
+						// 第三个参数为字符串或数组，字符串就是一个文本节点，数组就是存放多个子节点，数组项为字符串就是文本节点，数组项为createElement方法返回值就是一个元素节点
+						let vnode = createElement('h' + this.level, {
+							attrs: {
+								id: 'h' + this.level
+							}
+						}, [
+								createElement('a', {
+									domProps: {
+										href: '#' + this.title
+									}
+								}, this.$slots.default)
+							]
+						);
+						return vnode;
+					},
+					// template: `<h1 v-if="level === 1">
+					// 				<a :href="'#'+title">
+					// 					<slot></slot>
+					// 				</a>
+					// 			</h1>
+					// 			<h2 v-else-if="level === 2">
+					// 				<a :href="'#'+title">
+					// 					<slot></slot>
+					// 				</a>
+					// 			</h2>
+					// 			<h3 v-else-if="level === 3">
+					// 				<a :href="'#'+title">
+					// 					<slot></slot>
+					// 				</a>
+					// 			</h3>
+					// 			<h4 v-else-if="level === 4">
+					// 				<a :href="'#'+title">
+					// 					<slot></slot>
+					// 				</a>
+					// 			</h4>
+					// 			<h5 v-else-if="level === 5">
+					// 				<a :href="'#'+title">
+					// 					<slot></slot>
+					// 				</a>
+					// 			</h5>
+					// 			<h6 v-else-if="level === 6">
+					// 				<a :href="'#'+title">
+					// 					<slot></slot>
+					// 				</a>
+					// 			</h6>`,
+					props: {
+						level: {
+							type: Number,
+							required: true
+						},
+						title: {
+							type: String,
+							default: ''
+						}
+					}
+				}
+			}
+		})
+	</script>
+</body>
+
+</html>

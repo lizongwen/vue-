@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="../js/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<anchored-heading :level="2" :title="'标题'">Hello world!</anchored-heading>
+	</div>
+	<script>
+		let vm = new Vue({
+			el: '#app',
+			components: {
+				'anchored-heading': {
+					render: function (createElement) {
+						var com = {
+							render: (createElement) => {
+								var vnode = createElement('h' + this.level, {
+									attrs: {
+										id: 'h' + this.level
+									}
+								}, [
+										createElement('a', {
+											domProps: {
+												href: '#' + this.title
+											}
+										}, this.$slots.default)
+									]);
+								return vnode
+							}
+						}
+						// createElement方法第一个参数为组件的情况，无第三个参数
+						let vnode = createElement(com, {
+							attrs: {
+								class: 'h' + this.level,//不同属性叠加,
+								id: 'aaa'//相同属性覆盖掉第一个参数组件中设置的相同属性
+							}
+						});
+						return vnode;
+					},
+					props: {
+						level: {
+							type: Number,
+							required: true
+						},
+						title: {
+							type: String,
+							default: ''
+						}
+					}
+				}
+			}
+		})
+	</script>
+</body>
+
+</html>
