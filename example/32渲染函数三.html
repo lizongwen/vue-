@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>函数化组件</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="../js/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<smart-itme :data="data">hello 函数化组件</smart-itme>
+		<button type="button" @click=change("img")>切换为图片组件</button>
+		<button type="button" @click=change("video")>切换为视频组件</button>
+		<button type="button" @click=change("text")>切换为文本组件</button>
+	</div>
+	<script>
+		// 图片组件
+		var ImgItem = {
+			props: ['data'],
+			render: function (createElement) {
+				return createElement('div', [
+					createElement('p', '图片组件'),
+					createElement('img', {
+						attrs: {
+							src: this.data.url
+						}
+					})
+				])
+			}
+		}
+
+		// 视频组件
+		var VideoItem = {
+			props: ['data'],
+			render: function (createElement) {
+				return createElement('div', [
+					createElement('p', '视频组件'),
+					createElement('video', {
+						attrs: {
+							src: this.data.url,
+							controls: 'controls',
+							autoplay: 'autoplay'
+						}
+					})
+				])
+			}
+		}
+
+		// 纯文本组件
+		var TextItem = {
+			props: ['data'],
+			render: function (createElement) {
+				return createElement('div', [
+					createElement('p', '纯文本组件'),
+					createElement('p', this.data.text)
+				])
+			}
+		}
+
+		let vm = new Vue({
+			el: '#app',
+			data: {
+				data: {}
+			},
+			methods: {
+				change: function (type) {
+					if (type === 'img') {
+						this.data = {
+							type: 'img',
+							url: 'https://raw.githubusercontent.com/iview/iview/master/assets/logo.png',
+						}
+					} else if (type === 'video') {
+						this.data = {
+							type: 'video',
+							url: 'http://vjs.zencdn.net/v/oceans.mp4'
+						}
+					} else if (type === 'text') {
+						this.data = {
+							type: 'text',
+							text: '这是一段纯文本'
+						}
+					}
+				}
+			},
+			created: function () {
+				this.change('text')
+			},
+			components: {
+				'smart-itme': {
+					functional: true,
+					render: function (createElement, context) {
+						
+						function getComponent() {
+							var data = context.props.data;
+							if (data.type === 'img') return ImgItem;
+							if (data.type === 'video') return VideoItem;
+							return TextItem;
+						}
+						console.log(context.children)
+						return createElement(getComponent(), {
+							props: {
+								data: context.props.data
+							}
+						})
+					},
+					props: {
+						data: {
+							type: Object,
+							required: true
+						}
+					}
+				}
+			}
+		})
+
+	</script>
+</body>
+
+</html>
