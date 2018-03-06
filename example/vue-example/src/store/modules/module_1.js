@@ -1,14 +1,16 @@
-let state={
+let state = {
+	count: 0
+}
+let getters = {
 
 }
-let getters={
-	
+let actions = {
+
 }
-let actions={
-	
-}
-let mutations={
-	
+let mutations = {
+	increment(state) {
+		state.count++
+	}
 }
 export default {
 	state,
