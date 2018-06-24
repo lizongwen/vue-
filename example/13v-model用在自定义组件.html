@@ -12,8 +12,7 @@
 	<div id="app">
 		父组件对应值：{{price}}
 		<comp v-model="price"></comp>
-		<br>
-		{{foo}}
+		<br> {{foo}}
 		<comp1 v-model="foo" value="父组件value值"></comp1>
 	</div>
 	<script>
@@ -21,7 +20,7 @@
 			el: '#app',
 			data: {
 				price: 0,
-				foo:true
+				foo: true
 			},
 			components: {
 				comp: {
@@ -30,16 +29,7 @@
 					methods: {
 						// 不是直接更新值，而是使用此方法来对输入值进行格式化和位数限制
 						updateValue: function (value) {
-							var formattedValue = value
-								// 删除两侧的空格符
-								.trim()
-								// 保留 2 位小数
-								.slice(
-								0,
-								value.indexOf('.') === -1
-									? value.length
-									: value.indexOf('.') + 3
-								)
+							var formattedValue = value.trim().slice(0, value.indexOf('.') === -1 ? value.length : value.indexOf('.') + 3)
 							// 如果值尚不合规，则手动覆盖为合规的值
 							if (formattedValue !== value) {
 								this.$refs.input.value = formattedValue
@@ -59,9 +49,9 @@
 						checked: Boolean,
 						value: String
 					},
-					methods:{
-						handle:function(boolean){
-							this.$emit('change',boolean)
+					methods: {
+						handle: function (boolean) {
+							this.$emit('change', boolean)
 						}
 					}
 				}
