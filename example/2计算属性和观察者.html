@@ -20,8 +20,14 @@
 		<p>
 			Ask a yes/no question:
 			<input v-model="question">
+			<input v-model="news.num1.s1">
+			<input v-model="news.num2.s2">
+			<input v-model="total1">
+			<input v-model="total2">
 		</p>
 		<p>{{ answer }}</p>
+		<div>{{total1}}</div>
+		<div>{{total2}}</div>
 	</div>
 	<script>
 		var vm = new Vue({
@@ -29,20 +35,47 @@
 			data: {
 				message: 'hello',
 				question: '',
+				news:{
+					num1:{
+						s1:null
+					},
+					num2:{
+						s2:null
+					},
+					num3:{
+						s1:null
+					},
+					num4:{
+						s2:null
+					},
+				},
 				answer: 'I cannot give you an answer until you ask a question!'
 			},
 			computed: {
+				total1:function(){
+					return this.news.num1.s1+this.news.num2.s2
+				},
+				total2(){
+					return this.news.num3.s1+this.news.num4.s2
+				},
 				reversedMessage1: function () {//写法一
-					console.log(this);
 					return this.message.split('').reverse().join('');
 				},
 				reversedMessage2() {//写法二
-					console.log(this);
 					return this.message.split('').reverse().join('');
 				},
 				reversedMessage4() {
 					return this.reversedMessage1 + '999';
 				}
+			},
+			mounted(){
+				setTimeout(()=>{
+					this.news.num1.s1=5
+					this.news.num2.s2=9
+					this.news.num3.s1=15
+					this.news.num4.s2=19
+
+				},5000)
 			},
 			methods: {
 				reversedMessage3() {
