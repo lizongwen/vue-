@@ -91,6 +91,7 @@
 				'smart-itme': {
 					functional: true,
 					render: function (createElement, context) {
+						console.log(context)
 						function getComponent() {
 							var data = context.props.data;
 							if (data.type === 'img') return ImgItem;

@@ -10,11 +10,15 @@
 
 <body>
 	<div id="app">
-		<anchored-heading :level="2" :title="'标题'">Hello world!</anchored-heading>
+		<anchored-heading :level="num" :title="'标题'">Hello world!</anchored-heading>
+		<div @click="set">修改</div>
 	</div>
 	<script>
 		let vm = new Vue({
 			el: '#app',
+			data: {
+				num: 2
+			},
 			components: {
 				'anchored-heading': {
 					render: function (createElement) {
@@ -23,8 +27,9 @@
 						// 第三个参数为字符串或数组，字符串就是一个文本节点，数组就是存放多个子节点，数组项为字符串就是文本节点，数组项为createElement方法返回值就是一个元素节点
 						let vnode = createElement('h' + this.level, {
 							attrs: {
-								id: 'h' + this.level
-							}
+								id: 'h' + this.level,
+								ref:'aaaa'
+							},
 						}, [
 								createElement('a', {
 									domProps: {
@@ -75,6 +80,11 @@
 							default: ''
 						}
 					}
+				}
+			},
+			methods:{
+				set(){
+					this.num=3
 				}
 			}
 		})
