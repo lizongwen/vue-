@@ -51,7 +51,7 @@ new Vue({
 	},
 	methods: {
 		reduce: function (index) {
-			if (this.goods[index].count === 1) return;
+			if (this.goods[index].count === 0) return;
 			this.goods[index].count--;
 		},
 		add: function (index) {

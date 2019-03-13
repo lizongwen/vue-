@@ -31,7 +31,7 @@
 							<td>{{item.goodsName}}</td>
 							<td>{{item.price}}</td>
 							<td>
-								<button type="button" @click="reduce(index)" :disabled="item.count===1">-</button>
+								<button type="button" @click="reduce(index)" :disabled="item.count===0">-</button>
 								{{item.count}}
 								<button type="button" @click="add(index)" :disabled="!item.checked">+</button>
 							</td>

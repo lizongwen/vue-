@@ -9,36 +9,36 @@
 </head>
 
 <body>
-	<div id="app" >
-	<div slot="aaaa">
-		布尔
-		<div v-bind:id="isTrue">一、bind属性->true</div>
-		<div v-bind:id="isFalse">二、bind属性->未绑定上</div>
-		<br/> 数值
-		<div v-bind:id="666">一、bind属性->666</div>
-		<div v-bind:id="'666'">二、bind属性->666</div>
-		<br/> 字符串
-		<div v-bind:id="str">一、bind属性->strValue</div>
-		<div v-bind:id="'str'">二、bind属性->str</div>
-		<div v-bind:id="'str'+str">三、bind属性->strstrValue</div>
-		<br/> 数组
-		<div v-bind:id="[1,2]">一、bind属性->1,2</div>
-		<div v-bind:id="['a','b']">二、bind属性->a,b</div>
-		<div v-bind:id="[item1,item2]">三、bind属性->a,b</div>
-		<div v-bind:id="['a',item1]">四、bind属性->a,a</div>
-		<div v-bind:id="arr1">五、bind属性->1,2</div>
-		<div v-bind:id="arr2">六、bind属性->a,b</div>
-		<br/> 对象
-		<div v-bind:id="{a:1,b:2}">一、bind属性->[object object]</div>
-		<div v-bind:id="{obj1,obj2}">二、bind属性->[object object]</div>
-		<div v-bind:id="obj">三、bind属性->[object object]</div>
-		<br/> 数组对象/对象数组
-		<div v-bind:id="[{ a: 1, b: 2 }]">一、bind属性->[object object]</div>
-		<div v-bind:id="{ a: [1, 2], b: ['m', 'n'] }">二、bind属性->[object object]</div>
-		<div v-bind:id="{ a: [1, 2], b: [m, n] }">三、bind属性->[object object]</div>
-		<div v-bind:id="arr_obj1">四、bind属性->[object object]</div>
-		<div v-bind:id="arr_obj2">五、bind属性->[object object]</div>
-	</div>
+	<div id="app">
+		<div slot="aaaa">
+			布尔
+			<div v-bind:id="isTrue">一、bind属性->true</div>
+			<div v-bind:id="isFalse">二、bind属性->未绑定上</div>
+			<br /> 数值
+			<div v-bind:id="666">一、bind属性->666</div>
+			<div v-bind:id="'666'">二、bind属性->666</div>
+			<br /> 字符串
+			<div v-bind:id="str">一、bind属性->strValue</div>
+			<div v-bind:id="'str'">二、bind属性->str</div>
+			<div v-bind:id="'str'+str">三、bind属性->strstrValue</div>
+			<br /> 数组
+			<div v-bind:id="[1,2]">一、bind属性->1,2</div>
+			<div v-bind:id="['a','b']">二、bind属性->a,b</div>
+			<div v-bind:id="[item1,item2]">三、bind属性->a,b</div>
+			<div v-bind:id="['a',item1]">四、bind属性->a,a</div>
+			<div v-bind:id="arr1">五、bind属性->1,2</div>
+			<div v-bind:id="arr2">六、bind属性->a,b</div>
+			<br /> 对象
+			<div v-bind:id="{a:1,b:2}">一、bind属性->[object object]</div>
+			<div v-bind:id="{obj1,obj2}">二、bind属性->[object object]</div>
+			<div v-bind:id="obj">三、bind属性->[object object]</div>
+			<br /> 数组对象/对象数组
+			<div v-bind:id="[{ a: 1, b: 2 }]">一、bind属性->[object object]</div>
+			<div v-bind:id="{ a: [1, 2], b: ['m', 'n'] }">二、bind属性->[object object]</div>
+			<div v-bind:id="{ a: [1, 2], b: [m, n] }">三、bind属性->[object object]</div>
+			<div v-bind:id="arr_obj1">四、bind属性->[object object]</div>
+			<div v-bind:id="arr_obj2">五、bind属性->[object object]</div>
+		</div>
 	</div>
 	<script>
 		new Vue({
