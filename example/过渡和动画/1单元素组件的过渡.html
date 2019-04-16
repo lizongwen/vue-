@@ -9,20 +9,28 @@
 	<style>
 		.v-enter-active,
 		.v-leave-active {
-			transition: opacity .5s;
+			transition: opacity 30s;
 		}
 
-		.v-enter,
-		.v-leave-to {
+		.v-enter{
 			opacity: 0;
 		}
-
-		.v-leave,
 		.v-enter-to {
 			opacity: 1
 		}
 
-		.slide-fade-enter-active,
+		
+		.v-leave{
+			opacity: 1
+		}
+		.v-leave-to {
+			opacity: 0;
+		}
+
+		
+		
+
+		/* .slide-fade-enter-active,
 		.slide-fade-leave-active {
 			transition: all .5s ease;
 		}
@@ -35,7 +43,7 @@
 		.slide-fade-leave,
 		.slide-fade-enter-to {
 			opacity: 1;
-		}
+		} */
 	</style>
 </head>
 
@@ -47,13 +55,16 @@
 		<transition>
 			<p v-if="show1">hello</p>
 		</transition>
+		<transition>
+			<p v-if="!show1">hello1</p>
+		</transition>
 
-		<button @click="show2 = !show2">
+		<!-- <button @click="show2 = !show2">
 			Toggle render
 		</button>
 		<transition name="slide-fade">
 			<p v-if="show2">hello</p>
-		</transition>
+		</transition> -->
 	</div>
 	<script>
 		var vm = new Vue({
